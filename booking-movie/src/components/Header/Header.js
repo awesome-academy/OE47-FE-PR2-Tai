@@ -8,6 +8,8 @@ import {
     logoutAction,
 } from "../../redux/actions/authActions";
 
+import "./Header.scss";
+
 function Header() {
     const user = useSelector(getUserSelector);
     const isLogined = user ? true : false;
@@ -88,127 +90,127 @@ function Header() {
     };
 
     return (
-        <Navbar bg="light" expand="lg">
+        <header>
             <Container>
-                <Navbar.Brand className="navbar-brand" href={navBarData[0].url}>
-                    <img
-                        width={150}
-                        height={80}
-                        src="https://seeklogo.com/images/M/movie-time-cinema-logo-8B5BE91828-seeklogo.com.png"
-                        alt="logo cinema branch"
-                    />
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav style={{ width: "100%" }}>
-                        <ul className="nav ms-lg-auto align-items-center justify-content-center flex-column flex-lg-row">
-                            {navBarData.map((item, index) =>
-                                item.url === "/movies" ? (
-                                    <li key={index} className="dropdown">
-                                        <a
-                                            href={item.url}
-                                            className="nav-link px-4 link-dark fw-bold dropdown-toggle"
-                                            data-bs-toggle="dropdown"
+                <Navbar expand="lg">
+                    <Navbar.Brand href={navBarData[0].url}>
+                        <img
+                            src="https://seeklogo.com/images/M/movie-time-cinema-logo-8B5BE91828-seeklogo.com.png"
+                            alt="logo cinema branch"
+                        />
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav style={{ width: "100%" }}>
+                            <ul className="nav ms-lg-auto align-items-center justify-content-center flex-column flex-lg-row">
+                                {navBarData.map((item, index) =>
+                                    item.url === "/movies" ? (
+                                        <li key={index} className="dropdown">
+                                            <a
+                                                href={item.url}
+                                                className="nav-link px-4 link-dark fw-bold dropdown-toggle"
+                                                data-bs-toggle="dropdown"
+                                            >
+                                                {item.name}
+                                            </a>
+                                            <ul className="dropdown-menu">
+                                                {item.sub.map((sub, index) => (
+                                                    <li key={index}>
+                                                        <Link
+                                                            to={sub.url}
+                                                            className="dropdown-item"
+                                                        >
+                                                            {sub.name}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </li>
+                                    ) : (
+                                        <li key={index}>
+                                            <Link
+                                                to={item.url}
+                                                className="nav-link px-4 link-dark fw-bold menu-link"
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                            <div className="text-center text-lg-end ms-lg-auto">
+                                {!user ? (
+                                    <>
+                                        <Button
+                                            onClick={loginOnClick}
+                                            variant="danger"
+                                            className="me-3"
                                         >
-                                            {item.name}
-                                        </a>
-                                        <ul className="dropdown-menu">
-                                            {item.sub.map((sub, index) => (
-                                                <li key={index}>
-                                                    <Link
-                                                        to={sub.url}
-                                                        className="dropdown-item"
-                                                    >
-                                                        {sub.name}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </li>
+                                            Đăng nhập
+                                        </Button>
+                                        <Button
+                                            onClick={registerOnClick}
+                                            variant="danger"
+                                        >
+                                            Đăng ký
+                                        </Button>
+                                    </>
                                 ) : (
-                                    <li key={index}>
-                                        <Link
-                                            to={item.url}
-                                            className="nav-link px-4 link-dark fw-bold menu-link"
+                                    <div className="dropdown">
+                                        <Button
+                                            className="dropdown-toggle btn btn-color-profile"
+                                            id="dropdownMenuProfile"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
                                         >
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                )
-                            )}
-                        </ul>
-                        <div className="text-center text-lg-end ms-lg-auto">
-                            {!user ? (
-                                <>
-                                    <Button
-                                        onClick={loginOnClick}
-                                        variant="danger"
-                                        className="me-3"
-                                    >
-                                        Đăng nhập
-                                    </Button>
-                                    <Button
-                                        onClick={registerOnClick}
-                                        variant="danger"
-                                    >
-                                        Đăng ký
-                                    </Button>
-                                </>
-                            ) : (
-                                <div className="dropdown">
-                                    <Button
-                                        className="dropdown-toggle btn btn-color-profile"
-                                        id="dropdownMenuProfile"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        <div>
-                                            <img
-                                                src={user.avatar}
-                                                alt="avatar"
-                                                width={36}
-                                                height={36}
-                                                className="rounded-circle img-cover"
-                                            />
-                                            <span className="text-center ms-1 mx-auto">
-                                                {user.fullname}
-                                            </span>
-                                        </div>
-                                    </Button>
-                                    <ul
-                                        className="dropdown-menu"
-                                        aria-labelledby="dropdownMenuProfile"
-                                    >
-                                        {userData.map((item, index) =>
-                                            item.url === "/logout" ? (
-                                                <li key={index}>
-                                                    <a
-                                                        className="dropdown-item"
-                                                        onClick={onLogout}
-                                                        href={item.url}
-                                                    >
-                                                        {item.name}
-                                                    </a>
-                                                </li>
-                                            ) : (
-                                                <li key={index}>
-                                                    <Link
-                                                        className="dropdown-item"
-                                                        to={item.url}
-                                                    >
-                                                        {item.name}
-                                                    </Link>
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
-                    </Nav>
-                </Navbar.Collapse>
+                                            <div>
+                                                <img
+                                                    src={user.avatar}
+                                                    alt="avatar"
+                                                    width={36}
+                                                    height={36}
+                                                    className="rounded-circle img-cover"
+                                                />
+                                                <span className="text-center ms-1 mx-auto">
+                                                    {user.fullname}
+                                                </span>
+                                            </div>
+                                        </Button>
+                                        <ul
+                                            className="dropdown-menu"
+                                            aria-labelledby="dropdownMenuProfile"
+                                        >
+                                            {userData.map((item, index) =>
+                                                item.url === "/logout" ? (
+                                                    <li key={index}>
+                                                        <a
+                                                            className="dropdown-item"
+                                                            onClick={onLogout}
+                                                            href={item.url}
+                                                        >
+                                                            {item.name}
+                                                        </a>
+                                                    </li>
+                                                ) : (
+                                                    <li key={index}>
+                                                        <Link
+                                                            className="dropdown-item"
+                                                            to={item.url}
+                                                        >
+                                                            {item.name}
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
             </Container>
-        </Navbar>
+        </header>
     );
 }
 

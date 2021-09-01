@@ -1,14 +1,16 @@
 import "./App.scss";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+
+import UserLayout from "./layout/UserLayout";
+import UserPage from "./pages/User";
 
 function App() {
     return (
         <>
             <Router>
-                <Header />
-                <Footer />
+                <Switch>
+                    <UserLayout path="/" component={UserPage} />
+                </Switch>
             </Router>
         </>
     );

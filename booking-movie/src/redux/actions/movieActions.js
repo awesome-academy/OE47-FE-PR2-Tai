@@ -4,9 +4,10 @@ import adminMovieApi from "../../api/admin/movieApi";
 export const getAllMoviesByStateAction = (state) => async (dispatch) => {
     try {
         const response = await userMovieApi.getByState(state);
+        // console.log(response);
         dispatch({
             type: "GET_MOVIES_SUCCESS",
-            payload: response.data.movies,
+            payload: response.movies,
         });
     } catch (error) {
         dispatch({

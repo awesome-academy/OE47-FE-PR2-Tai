@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import subURL from "./configApi";
+import { subURL } from "../configApi";
 
 const userMovieApi = {
     getAll: () => {
