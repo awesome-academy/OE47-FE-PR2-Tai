@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import subURL from "./configApi";
+import { subURL } from "../configApi";
 const userNewsApi = {
     getNewsAll: () => {
         const url = `${subURL}/news`;

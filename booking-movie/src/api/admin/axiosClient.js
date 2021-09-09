@@ -1,8 +1,9 @@
 import axios from "axios";
 import queryString from "query-string";
+import { mainURL } from "../configApi";
 
 const axiosClient = axios.create({
-    baseURL: "https://cgv-cinemas-api.herokuapp.com/api/",
+    baseURL: mainURL,
     withCredentials: true,
     headers: {
         "Access-Control-Allow-Origin": "*",
