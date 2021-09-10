@@ -1,3 +1,5 @@
+@import "../main";
+
 .navbar {
 	height: 80px;
 
@@ -8,4 +10,8 @@
 			height: 100%;
 		}
 	}
+}
+
+header {
+	border: 1px solid rgba(0, 0, 0, 0.075);
 }
