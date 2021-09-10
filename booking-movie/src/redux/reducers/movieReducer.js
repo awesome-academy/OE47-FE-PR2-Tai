@@ -77,6 +77,11 @@ const movieReducer = (state = initialState, action) => {
                 comments: [],
             };
         }
+        case "CREATE_COMMENT_SUCCESS": {
+            return {
+                ...state,
+            };
+        }
         case "REMOVE_COMMENT_MOVIE": {
             return {
                 ...state,

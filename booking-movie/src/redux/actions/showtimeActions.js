@@ -46,7 +46,6 @@ export const getShowtimeSeatsAction = (id) => async (dispatch) => {
 export const getAllShowtimesByCineplexAction = (id) => async (dispatch) => {
     try {
         const response = await userShowtimeApi.getByCineplexId(id);
-        console.log(response.data);
         dispatch({
             type: "GET_ALL_SHOWTIMES_BY_CINEPLEX_SUCCESS",
             payload: response.data,

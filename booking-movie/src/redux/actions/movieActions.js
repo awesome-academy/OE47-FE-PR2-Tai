@@ -1,10 +1,11 @@
 import userMovieApi from "../../api/users/movieApi";
 import adminMovieApi from "../../api/admin/movieApi";
+import toast from "react-hot-toast";
 
 export const getAllMoviesByStateAction = (state) => async (dispatch) => {
     try {
         const response = await userMovieApi.getByState(state);
-        console.log(response);
+
         dispatch({
             type: "GET_MOVIES_SUCCESS",
             payload: response.movies,
@@ -26,7 +27,7 @@ export const getMovieBySlugAction = (slug, history) => async (dispatch) => {
         if (!response.error) {
             dispatch({
                 type: "GET_MOVIE_DETAIL_SUCCESS",
-                payload: response.data,
+                payload: response,
             });
         } else {
             dispatch({
@@ -49,10 +50,10 @@ export const getMovieBySlugAction = (slug, history) => async (dispatch) => {
 export const getMovieShowtimesAction = (id, day) => async (dispatch) => {
     try {
         const response = await userMovieApi.getShowtimes(id, day);
-        console.log(response);
+
         dispatch({
             type: "GET_MOVIE_SHOWTIMES_SUCCESS",
-            payload: response.data,
+            payload: response,
         });
     } catch (error) {
         dispatch({
@@ -68,20 +69,37 @@ export const getMovieShowtimesAction = (id, day) => async (dispatch) => {
 export const getCommentByUser = (id) => async (dispatch) => {
     try {
         const response = await userMovieApi.getComment(id);
-
-        if (!response.data.error) {
+        if (!response.error) {
             dispatch({
                 type: "GET_COMMENT_MOVIE",
-                payload: response.data,
+                payload: response,
             });
         } else {
             dispatch({
                 type: "GET_COMMENT_MOVIE_FAIL",
-                payload: response.data.error,
+                payload: response.error,
             });
         }
     } catch (error) {
-        console.log(error);
+        toast.error(error);
+    }
+};
+
+export const addCommentByUser = (data, id) => async (dispatch) => {
+    try {
+        await userMovieApi.postComment(data);
+
+        dispatch({
+            type: "CREATE_COMMENT_SUCCESS",
+        });
+
+        const response = await userMovieApi.getComment(id);
+        dispatch({
+            type: "GET_COMMENT_MOVIE",
+            payload: response,
+        });
+    } catch (error) {
+        toast.error(error);
     }
 };
 

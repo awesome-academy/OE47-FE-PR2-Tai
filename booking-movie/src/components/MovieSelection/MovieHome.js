@@ -26,7 +26,7 @@ function MovieSelection() {
             });
         };
     }, [dispatch]);
-    console.log(movies);
+
     return (
         <Container className="my-5">
             <Row>

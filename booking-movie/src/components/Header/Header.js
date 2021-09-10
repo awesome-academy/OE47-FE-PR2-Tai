@@ -15,7 +15,6 @@ function Header() {
     const isLogined = user ? true : false;
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log(user);
 
     const navBarData = [
         {
