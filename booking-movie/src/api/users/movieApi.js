@@ -26,6 +26,11 @@ const userMovieApi = {
         const url = `${subURL}/comment?slug=${id}`;
         return axiosClient.get(url);
     },
+
+    postComment: (data) => {
+        const url = `${subURL}/comment`;
+        return axiosClient.post(url, { ...data });
+    },
 };
 
 export default userMovieApi;

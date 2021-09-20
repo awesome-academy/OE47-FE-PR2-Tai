@@ -1,9 +1,8 @@
+import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-
 import UserLayout from "./layout/UserLayout";
 import UserPage from "./pages/User";
-import Movie from "./components/MovieSelection/MovieList";
 
 function App() {
     return (

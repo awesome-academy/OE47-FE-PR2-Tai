@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import userNewsApi from "../../api/users/newsApi";
 
 export const getAllNews = () => async (dispatch) => {
@@ -8,7 +9,7 @@ export const getAllNews = () => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
-        console.log(error);
+        toast.error(error);
     }
 };
 
@@ -20,6 +21,6 @@ export const getDetailNews = (id) => async (dispatch) => {
             payload: response.data[0],
         });
     } catch (error) {
-        console.log(error);
+        toast.error(error);
     }
 };

@@ -9,7 +9,7 @@ export const setAccessToken = (token) => ({
 export const loginAction = (data) => async (dispatch) => {
     try {
         const response = await userAuthApi.login(data);
-        console.log(response.data);
+
         if (response.data.user) {
             dispatch({
                 type: "LOGIN_SUCCESS",
